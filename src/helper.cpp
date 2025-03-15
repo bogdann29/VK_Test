@@ -1,20 +1,16 @@
 #include "helper.h"
 
-size_t read_file(std::string& filename, std::vector<std::vector<size_t>>& graph,
+size_t read_file(std::istream& stream, std::vector<std::vector<size_t>>& graph,
                     size_t& vertices, size_t& edges){
-    std::ifstream file(filename);
-    if (!file.is_open()) {
-        throw std::runtime_error("Не удалось открыть файл" + filename);
-    }
 
-    if(!(file >> vertices >> edges)){
+    if(!(stream >> vertices >> edges)){
         throw std::runtime_error("Неверный формат файла");
     }
     graph.resize(vertices);
 
     size_t v1, v2;
     for(int i = 0; i < edges; ++i){
-        if(!(file >> v1 >> v2) || v1 >= vertices){
+        if(!(stream >> v1 >> v2) || v1 >= vertices || v2 >= vertices){
             throw std::runtime_error("Неверный формат файла");
         }
         graph[v1].push_back(v2);
@@ -22,7 +18,7 @@ size_t read_file(std::string& filename, std::vector<std::vector<size_t>>& graph,
     }
 
     size_t source;
-    if(!(file >> source)){
+    if(!(stream >> source) || source >= vertices){
         throw std::runtime_error("Неверный формат файла");
     }
 
@@ -30,6 +26,8 @@ size_t read_file(std::string& filename, std::vector<std::vector<size_t>>& graph,
 }
 
 std::vector<size_t> dijkstra(const std::vector<std::vector<size_t>>& graph, size_t vertices, size_t source){
+    if(vertices == 0)
+        return {};
     std::vector<size_t> distance(vertices, -1);
     distance[source] = 0;
 

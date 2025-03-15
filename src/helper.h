@@ -8,6 +8,6 @@
 #include <queue>
 #include "output.h"
 
-size_t read_file(std::string& filename, std::vector<std::vector<size_t>>& graph, size_t& vertices, size_t& edges);
+size_t read_file(std::istream& stream, std::vector<std::vector<size_t>>& graph, size_t& vertices, size_t& edges);
 
 std::vector<size_t> dijkstra(const std::vector<std::vector<size_t>>& graph, size_t vertices, size_t source);
