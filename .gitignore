@@ -1,7 +1,6 @@
 .vscode
 main
-gr.txt
-result.txt
+*.txt
 build
 !CMakeLists.txt
 !src/CMakeLists.txt

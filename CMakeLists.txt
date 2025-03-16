@@ -3,8 +3,6 @@ project(Graph)
 
 set(CMAKE_CXX_STANDARD 20)
 
-# add_custom_target(test "./tests/Google_Tests_run")
-
 include_directories(source)
 add_subdirectory(src)
 enable_testing()
